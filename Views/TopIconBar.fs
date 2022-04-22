@@ -4,16 +4,18 @@ open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 open Avalonia.Layout
-open Elmish
 
 open GeometrySandbox
 open GeometrySandbox.Extensions
 
-type Msg = Save
+type Msg =
+    | Save
+    | ToggleRuler
 
 let view (dispatch: Msg -> unit) : IView =
     let iconButtons : IView list =
-        [ "Save", Icon.save, Save ]
+        [ "Save", Icon.save, Save
+          "Toggle Ruler", Icon.rulerSquare, ToggleRuler ]
         |> List.map
             (fun (name, icon, msg) ->
                 Button.create [
@@ -21,10 +23,7 @@ let view (dispatch: Msg -> unit) : IView =
                     Button.margin Theme.spacing.small
                     Button.onClick (Event.handleEvent msg >> dispatch)
                     Button.content (icon Icon.large Theme.palette.primaryLightest)
-                    Button.tip [
-                        ToolTip.content name
-                        ToolTip.placement PlacementMode.Bottom
-                    ]
+                    Button.tip name
                 ]
                 :> IView)
 
