@@ -2,13 +2,13 @@ module GeometrySandbox.Theme
 
 open Avalonia.Controls
 
+open Avalonia.Media
 open GeometrySandbox.Extensions
 
 let program = "Bloom"
 let title = "Bloom"
 
-let icon (): WindowIcon =
-    WindowIcon "Assets/icon.ico"
+let icon () : WindowIcon = WindowIcon "Assets/icon.ico"
 
 /// Color palette is based off of the yellow color with a 150° tetradic color scheme
 /// https://paletton.com/#uid=70I2m0krBw0hcHpmp-MvIrjzmlr
@@ -22,20 +22,20 @@ let colors =
        yellow = "#FFA123"
        blue = "#2375B3"
        green = "#18AF6E"
-       red = "#FF6223"
-       |}
+       red = "#FF6223" |}
 
 let palette =
-    
+
     // Color Operations
     let darkest = Color.darken 0.2
     let darken = Color.darken 0.1
     let lighten = Color.lighten 0.1
     let lightest = Color.lighten 0.2
     let fade = Color.fadeOut 0.5
-    
+
     // Base Colors
     let foreground = Color.hex colors.offWhite
+    let gray = Color.hex colors.gray
     let primary = Color.hex colors.yellow
     let secondary = Color.hex colors.green
     let tertiary = Color.hex colors.blue
@@ -61,10 +61,12 @@ let palette =
        warning = colors.yellow
        danger = colors.red
        info = colors.blue
+       pageColor = colors.offWhite
        panelBackground = colors.darkGray
        panelTitle = colors.gray
        panelAccent = colors.lightGray
-       canvasBackground = colors.gray
+       canvasBackground = gray |> string
+       canvasBackgroundShadow = darken gray |> string
        shadowColor = colors.lightGray |}
 
 let lighter = Color.lighten 0.075
@@ -90,3 +92,11 @@ let size = {| small = 250. |}
 let drawing =
     {| strokeWidth = 1.
        dashArray = [ 3.; 3. ] |}
+       
+let boxShadowInset (color: string): BoxShadow =
+    // X-Offset, Y-Offset, Blur Radius, Color
+    BoxShadow.Parse $"inset 5 5 25 {color}"
+    
+let boxShadow (color: string): BoxShadow =
+    // X-Offset, Y-Offset, Blur Radius, Color
+    BoxShadow.Parse $"5 5 25 {color}"

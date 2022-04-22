@@ -11,6 +11,7 @@
     <Compile Include="Extensions\ViewExtensions.fs" />
     <Compile Include="Extensions\EventExtensions.fs" />
     <Compile Include="Extensions\DiscriminatedUnionExtensions.fs" />
+    <Compile Include="Extensions\StringExtensions.fs" />
     <Compile Include="Theme.fs" />
     <Compile Include="Views\Text.fs" />
     <Compile Include="Views\Form.fs" />

@@ -7,6 +7,7 @@ open Elmish
 open Geometry
 
 open GeometrySandbox.Views
+open GeometrySandbox.Extensions
 
 type Model =
     { Orientation: Orientation
@@ -36,8 +37,22 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     | PropertiesMsg propertiesMsg ->
         match propertiesMsg with
         | Properties.ChangeOrientation orientation -> { model with Orientation = orientation }, Cmd.none
-        | Properties.ChangeHeight newHeight -> model, Cmd.none
-        | Properties.ChangeWidth newWidth -> model, Cmd.none
+        | Properties.ChangeHeight newHeightString ->
+            match String.toFloat newHeightString with
+            | Some newHeight ->
+                { model with
+                      Height = Length.cssPixels newHeight },
+                Cmd.none
+            | None -> model, Cmd.none
+
+        | Properties.ChangeWidth newWidthString ->
+            match String.toFloat newWidthString with
+            | Some newWidth ->
+                { model with
+                      Width = Length.cssPixels newWidth },
+                Cmd.none
+            | None -> model, Cmd.none
+
         | Properties.ChangeSeed newSeed -> { model with Seed = newSeed }, Cmd.none
 
 let propertiesModel (model: Model) : Properties.Model =
@@ -57,7 +72,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
             Properties.view (propertiesModel model) (PropertiesMsg >> dispatch)
             |> DockPanel.child Dock.Right
 
-            Viewport.view
+            Viewport.view ()
         ]
     ]
     :> IView
