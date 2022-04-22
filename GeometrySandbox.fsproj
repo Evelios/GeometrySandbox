@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Types.fs" />
     <Compile Include="Extensions\ColorExtensions.fs" />
     <Compile Include="Extensions\ViewExtensions.fs" />
     <Compile Include="Extensions\EventExtensions.fs" />
     <Compile Include="Theme.fs" />
+    <Compile Include="Views\Text.fs" />
     <Compile Include="Views\Icon.fs" />
     <Compile Include="Views\DockPanel.fs" />
     <Compile Include="Views\TopIconBar.fs" />

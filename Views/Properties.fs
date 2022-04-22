@@ -9,15 +9,35 @@ open GeometrySandbox
 open GeometrySandbox.Extensions
 
 
-type Msg = | NoMsg
+type Msg = ChangeOrientation of Orientation
 
-let view (dispatch: Msg -> unit) : IView =
-    let panels =
-        [ "Orientation"; "Size"; "Seed" ]
-        |> List.map (fun name -> TextBlock.create [ TextBlock.text name ] :> IView)
+type Model = { Orientation: Orientation }
+
+let view (model: Model) (dispatch: Msg -> unit) : IView =
+
+    let orientationBlock =
+        StackPanel.create [
+            StackPanel.children [
+
+                Text.iconTitle
+                    (Icon.orientation Icon.large Theme.palette.primary)
+                    "Orientation"
+                    Theme.palette.foreground
+
+                ListBox.create [
+                    ListBox.dataItems [ Portrait; Landscape ]
+                    ListBox.selectedItem model.Orientation
+                    ListBox.onSelectedItemChanged
+                        (fun item ->
+                            if not (isNull item) then
+                                ChangeOrientation(item :?> Orientation)
+                                |> dispatch)
+                ]
+            ]
+        ]
 
     StackPanel.create [
         StackPanel.minWidth Theme.size.small
-        StackPanel.children panels
+        StackPanel.children [ orientationBlock ]
     ]
     :> IView
