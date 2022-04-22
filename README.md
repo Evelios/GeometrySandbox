@@ -1,50 +1,24 @@
 [fantomas]: https://github.com/fsprojects/fantomas
+
 [f# formatting]: https://marketplace.visualstudio.com/items?itemName=asti.fantomas-vs
 
 # GeometrySandbox
 
-This is an Avalonia.FuncUI Starter template, this template shows you in a brief way how you can create components and functions to render your UI.
+This is a framework to get started creating generative art in F#. This framework's goal is to get you up and running
+creating generative art as fast as possible! The aim of this framework is to enable everything in the workflow of making
+creative works within a beautiful environment but still allow your work to go to living anywhere you want it to go. If
+you want this work to live on a wall, resizing and saving is made easy for you. Let's say that you made an animation and
+want people to be able to see the animation playing online. You can either export the rendering as a video or gif
+format. If you really want to allow the user to have full interaction with the work you are creating, you can even embed
+the code into your website by converting your animation into javascript with [Fable](https://fable.io/).
+
+![Preview of the generative framework gui](./img/GeometrySandbox.png)
+
+
+# Development
 
 To run this application just type
 
 ```
 dotnet run
 ```
-
-You should briefly see your application window showing on your desktop.
-
-### Next Steps
-
-If you're using VSCode we recommend you to install [Fantomas]
-
-```
-dotnet new tool-manifest
-dotnet tool install fantomas
-```
-
-and add the following `.editorconfig`
-
-```editorconfig
-root = true
-
-[*]
-indent_style=space
-indent_size=4
-charset=utf-8
-trim_trailing_whitespace=true
-insert_final_newline=false
-
-[*.fs]
-fsharp_single_argument_web_mode=true
-```
-
-This should will allow Fantomas to format your code on save.
-
-Other editors like Rider and Visual Studio [F# Formatting] can also pick up these settings even if you don't install fantomas.
-
-### Feeling a little lost?
-
-Check out the documentation:
-https://avaloniacommunity.github.io/Avalonia.FuncUI.Docs/
-
-The documentation is still work in progress and will change over the next few months, but feel free to contribute and ask questions if needed.
