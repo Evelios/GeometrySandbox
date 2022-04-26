@@ -66,7 +66,7 @@ let dropdownSelection
            Orientation = Orientation.Vertical
            Element =
                ComboBox.create
-               <| [ ComboBox.dataItems (Seq.map DiscriminatedUnion.toString DiscriminatedUnion.allCases<'a>)
+               <| [ ComboBox.dataItems (Seq.map DiscriminatedUnion.toString DiscriminatedUnion.allCasesOf<'a>)
                     ComboBox.selectedItem (DiscriminatedUnion.toString state.Selected)
                     ComboBox.onSelectedItemChanged (tryUnbox >> Option.iter state.OnSelected) ] |}
 

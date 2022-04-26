@@ -3,7 +3,7 @@ module GeometrySandbox.Extensions.DiscriminatedUnion
 open Microsoft.FSharp.Reflection
 
 /// Get all the cases of a discriminated union.
-let allCases<'T> =
+let allCasesOf<'T> =
     FSharpType.GetUnionCases(typeof<'T>)
     |> Seq.map (fun x -> FSharpValue.MakeUnion(x, Array.zeroCreate (x.GetFields().Length)) :?> 'T)
 
@@ -21,10 +21,10 @@ let fromString<'a> (s: string) =
 
 /// Create a map from a discriminated union type where the key is the index of the case.
 let asIndexedMap<'T when 'T: comparison> () : Map<'T, int> =
-    allCases<'T>
+    allCasesOf<'T>
     |> Seq.mapi (fun i e -> e, i)
     |> Seq.toList
     |> Map.ofList
 
 /// Get the discriminated union case at a particular index.
-let fromIndex<'T> (index: int) : 'T = Seq.item index allCases<'T>
+let fromIndex<'T> (index: int) : 'T = Seq.item index allCasesOf<'T>

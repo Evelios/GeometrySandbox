@@ -3,6 +3,7 @@ module GeometrySandbox.Extensions.Size2D
 open Geometry
 open GeometrySandbox
 
+
 // ---- Accessors ----
 
 let orientation (size: Size2D<'Unit>) : Orientation =
@@ -10,6 +11,11 @@ let orientation (size: Size2D<'Unit>) : Orientation =
         Portrait
     else
         Landscape
+
+let height (size: Size2D<'Unit>) : Length<'Unit> = size.Width
+
+let width (size: Size2D<'Unit>) : Length<'Unit> = size.Width
+
 
 // ---- Modifiers ----
 
