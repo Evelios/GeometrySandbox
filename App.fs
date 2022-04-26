@@ -9,20 +9,14 @@ open Geometry
 open GeometrySandbox.Views
 open GeometrySandbox.Extensions
 
-type Model =
-    { Orientation: Orientation
-      Width: Length<Meters>
-      Height: Length<Meters>
-      Seed: int }
+type Model = { Size: Size2D<Meters>; Seed: int }
 
 type Msg =
     | TopIconBarMsg of TopIconBar.Msg
     | PropertiesMsg of Properties.Msg
 
 let init () : Model * Cmd<Msg> =
-    { Orientation = Portrait
-      Width = Length.cssPixels 600.
-      Height = Length.cssPixels 400.
+    { Size = Size2D.create (Length.cssPixels 600.) (Length.cssPixels 400.)
       Seed = 0 },
     Cmd.none
 
@@ -36,29 +30,31 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
 
     | PropertiesMsg propertiesMsg ->
         match propertiesMsg with
-        | Properties.ChangeOrientation orientation -> { model with Orientation = orientation }, Cmd.none
+        | Properties.ChangeOrientation orientation ->
+            { model with
+                  Size = Size2D.setOrientation orientation model.Size },
+            Cmd.none
+
         | Properties.ChangeHeight newHeightString ->
-            match String.toFloat newHeightString with
+            match String.toInt newHeightString with
             | Some newHeight ->
                 { model with
-                      Height = Length.cssPixels newHeight },
+                      Size = Size2D.setHeight (Length.cssPixels (float newHeight)) model.Size },
                 Cmd.none
             | None -> model, Cmd.none
 
         | Properties.ChangeWidth newWidthString ->
-            match String.toFloat newWidthString with
+            match String.toInt newWidthString with
             | Some newWidth ->
                 { model with
-                      Width = Length.cssPixels newWidth },
+                      Size = Size2D.setWidth (Length.cssPixels (float newWidth)) model.Size },
                 Cmd.none
             | None -> model, Cmd.none
 
         | Properties.ChangeSeed newSeed -> { model with Seed = newSeed }, Cmd.none
 
 let propertiesModel (model: Model) : Properties.Model =
-    { Orientation = model.Orientation
-      Height = model.Height
-      Width = model.Width
+    { Size =  model.Size
       Seed = model.Seed }
 
 let view (model: Model) (dispatch: Msg -> unit) : IView =
@@ -72,7 +68,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
             Properties.view (propertiesModel model) (PropertiesMsg >> dispatch)
             |> DockPanel.child Dock.Right
 
-            Viewport.view ()
+            Viewport.view model.Size
         ]
     ]
     :> IView

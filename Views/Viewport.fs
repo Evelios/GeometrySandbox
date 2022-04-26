@@ -3,23 +3,24 @@ module GeometrySandbox.Views.Viewport
 open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
+open Geometry
 
 open GeometrySandbox
 
 
-let pictureView =
+let pictureView size =
     Canvas.create [
-        Canvas.height 400.
-        Canvas.width 600.
+        Canvas.height (Length.inCssPixels size.Height)
+        Canvas.width (Length.inCssPixels size.Width)
         Canvas.background Theme.palette.pageColor
     ]
 
-let view () : IView =
+let view size : IView =
     let pictureWithDropShadow =
         Border.create [
-            Border.height 400.
-            Border.width 600.
-            Border.child pictureView
+            Border.height (Length.inCssPixels size.Height)
+            Border.width (Length.inCssPixels size.Width)
+            Border.child (pictureView size)
             Border.boxShadow (Theme.boxShadow Theme.palette.canvasBackgroundShadow)
         ]
 

@@ -4,9 +4,10 @@ open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 open Avalonia.Layout
-
 open Geometry
+
 open GeometrySandbox
+open GeometrySandbox.Extensions
 
 type Msg =
     | ChangeOrientation of Orientation
@@ -14,13 +15,9 @@ type Msg =
     | ChangeWidth of string
     | ChangeSeed of int
 
-type Model =
-    { Orientation: Orientation
-      Height: Length<Meters>
-      Width: Length<Meters>
-      Seed: int }
+type Model = { Size: Size2D<Meters>; Seed: int }
 
-let orientationBlock dispatch =
+let orientationBlock size dispatch =
     StackPanel.create [
         StackPanel.children [
 
@@ -28,6 +25,7 @@ let orientationBlock dispatch =
 
             ListBox.create [
                 ListBox.dataItems [ Portrait; Landscape ]
+                ListBox.selectedItem  (Size2D.orientation size)
                 ListBox.onSelectedItemChanged
                     (fun item ->
                         if not (isNull item) then
@@ -48,7 +46,7 @@ let sizeBlock model dispatch =
                    Orientation = Orientation.Vertical
                    Element =
                        TextBox.create [
-                           TextBox.text $"{Length.inCssPixels model.Height}"
+                           TextBox.text $"{Length.inCssPixels model.Size.Height}"
                            TextBox.onTextChanged (fun text -> ChangeHeight text |> dispatch)
                        ] |}
 
@@ -57,7 +55,7 @@ let sizeBlock model dispatch =
                    Orientation = Orientation.Vertical
                    Element =
                        TextBox.create [
-                           TextBox.text $"{Length.inCssPixels model.Width}"
+                           TextBox.text $"{Length.inCssPixels model.Size.Width}"
                            TextBox.onTextChanged (fun text -> ChangeWidth text |> dispatch)
                        ] |}
 
@@ -80,7 +78,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
     StackPanel.create [
         StackPanel.minWidth Theme.size.small
         StackPanel.children [
-            orientationBlock dispatch
+            orientationBlock model.Size dispatch
             sizeBlock model dispatch
             seed model dispatch
         ]

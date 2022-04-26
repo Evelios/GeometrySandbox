@@ -13,6 +13,7 @@
     <Compile Include="Extensions\DiscriminatedUnionExtensions.fs" />
     <Compile Include="Extensions\StringExtensions.fs" />
     <Compile Include="Extensions\Svg.fs" />
+    <Compile Include="Extensions\Size2D.fs" />
     <Compile Include="Theme.fs" />
     <Compile Include="Views\Text.fs" />
     <Compile Include="Views\Form.fs" />
@@ -30,7 +31,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.12" />
-    <PackageReference Include="Fsharp.Geometry" Version="0.1.61" />
+    <PackageReference Include="Fsharp.Geometry" Version="0.1.65" />
     <PackageReference Include="JaggerJo.Avalonia.FuncUI" Version="0.5.0" />
     <PackageReference Include="JaggerJo.Avalonia.FuncUI.DSL" Version="0.5.0" />
     <PackageReference Include="JaggerJo.Avalonia.FuncUI.Elmish" Version="0.5.0" />

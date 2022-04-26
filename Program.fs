@@ -23,6 +23,7 @@ type MainWindow() as this =
 
         Elmish.Program.mkProgram App.init App.update App.view
         |> Program.withHost this
+        |> Program.withConsoleTrace
         |> Program.run
 
 
