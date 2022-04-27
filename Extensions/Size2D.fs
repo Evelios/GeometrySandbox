@@ -16,6 +16,12 @@ let height (size: Size2D<'Unit>) : Length<'Unit> = size.Width
 
 let width (size: Size2D<'Unit>) : Length<'Unit> = size.Width
 
+// Returns the dimensions of the size as a tuple in the form (height, width)
+let dimensions (size: Size2D<'Unit>) : Length<'Unit> * Length<'Unit> = size.Height, size.Width
+
+let scale (x: float) (size: Size2D<'Unit>) : Size2D<'Unit> =
+    { Height = x * size.Height
+      Width = x * size.Width }
 
 // ---- Modifiers ----
 

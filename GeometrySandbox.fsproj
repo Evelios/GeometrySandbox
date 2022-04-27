@@ -11,10 +11,11 @@
     <Compile Include="Extensions\View.fs" />
     <Compile Include="Extensions\Event.fs" />
     <Compile Include="Extensions\DiscriminatedUnion.fs" />
-    <Compile Include="Extensions\StringExtensions.fs" />
+    <Compile Include="Extensions\String.fs" />
     <Compile Include="Extensions\Svg.fs" />
     <Compile Include="Extensions\Size2D.fs" />
     <Compile Include="Extensions\Length.fs" />
+    <Compile Include="Extensions\Tuple.fs" />
     <Compile Include="Theme.fs" />
     <Compile Include="Views\Text.fs" />
     <Compile Include="Views\Form.fs" />
