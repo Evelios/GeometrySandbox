@@ -15,6 +15,7 @@ open GeometrySandbox.Extensions
 type Msg =
     | TopIconBarMsg of TopIconBar.Msg
     | PropertiesMsg of Properties.Msg
+    | PageViewModesMsg of PageViewModes.Msg
     | Action of Action
 
 
@@ -90,6 +91,10 @@ let propertiesMsgHandler (msg: Properties.Msg) : Cmd<Msg> =
 
     | Properties.ChangeSeed seed -> Cmd.ofMsg (Action.ChangeSeed seed |> Action)
 
+let pageViewModesMsgHandler (msg: PageViewModes.Msg) : Cmd<Msg> =
+    match msg with
+    | PageViewModes.Action action -> Cmd.ofMsg (Action action)
+
 
 let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     match msg with
@@ -97,6 +102,7 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     // ---- Components ----
     | TopIconBarMsg topIconBarMsg -> model, topIconBarMsgHandler topIconBarMsg
     | PropertiesMsg propertiesMsg -> model, propertiesMsgHandler propertiesMsg
+    | PageViewModesMsg pageViewModesMsg -> model, pageViewModesMsgHandler pageViewModesMsg
 
     // ---- Actions ----
     | Action action -> takeAction action model, Cmd.none
@@ -113,7 +119,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
             Properties.view model (PropertiesMsg >> dispatch)
             |> DockPanel.child Dock.Right
 
-            PageViewModes.view model
+            PageViewModes.view model (PageViewModesMsg >> dispatch)
         ]
     ]
     :> IView

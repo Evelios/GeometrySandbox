@@ -3,11 +3,14 @@ module GeometrySandbox.Views.PageViewModes
 open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
+open Avalonia.Input
 open Avalonia.Media
 open Geometry
 
 open GeometrySandbox
 open GeometrySandbox.Extensions
+
+type Msg = Action of Action
 
 // ---- Internal Functions ----
 
@@ -62,7 +65,7 @@ let multiplePageView model : IView =
 
 // ---- Page Views ----
 
-let view model : IView =
+let view model dispatch : IView =
     let pageView =
         match model.PageViewMode with
         | PageViewMode.SinglePage -> page model.Size (Size2D.scale model.ViewScale model.Size)
@@ -78,5 +81,14 @@ let view model : IView =
                 Border.boxShadow (Theme.boxShadowInset Theme.palette.canvasBackgroundShadow)
             ]
         ]
+        DockPanel.onPointerWheelChanged (fun e ->
+            printfn $"{e.Delta}"
+            if e.Delta.Y > 0. then
+                Action Action.ZoomIn  |> dispatch
+            if e.Delta.Y < 0. then
+                Action Action.ZoomOut  |> dispatch
+                
+            )
     ]
     :> IView
+    
