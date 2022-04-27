@@ -20,7 +20,15 @@ type Orientation =
 type Seed = int
 
 [<RequireQualifiedAccess>]
+type PageViewMode =
+    | SinglePage
+    | FramedPage
+    | MultiplePages
+    | FullScreen
+
+[<RequireQualifiedAccess>]
 type Action =
+    | ChangePageViewMode of PageViewMode
     | ChangeOrientation of Orientation
     | ChangeHeight of float
     | ChangeWidth of float
@@ -32,12 +40,9 @@ type Action =
 
 // ---- UI Models --------------------------------------------------------------
 
-type UserViewport = UserViewport
-
-type YDownCoordinates = YDownCoordinates
-
 type Model =
     { Size: Size2D<Meters>
       Unit: LengthUnit
       Seed: int
-      ViewScale: float }
+      ViewScale: float
+      PageViewMode: PageViewMode }

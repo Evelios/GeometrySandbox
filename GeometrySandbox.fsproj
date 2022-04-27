@@ -22,8 +22,8 @@
     <Compile Include="Views\DockPanel.fs" />
     <Compile Include="Views\Icon.fs" />
     <Compile Include="Views\TopIconBar.fs" />
-    <Compile Include="Views\Viewport.fs" />
     <Compile Include="Views\Properties.fs" />
+    <Compile Include="Views\PageViewModes.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

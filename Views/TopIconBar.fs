@@ -19,7 +19,12 @@ let view (dispatch: Msg -> unit) : IView =
           "Toggle Ruler", Icon.rulerSquare, ToggleRuler
           "Zoom In", Icon.zoomIn, Action Action.ZoomIn
           "Zoom Out", Icon.zoomOut, Action Action.ZoomOut
-          "Zoom Full Size", Icon.zoomReturn, Action Action.ZoomToFullSize ]
+          "Zoom Full Size", Icon.zoomReturn, Action Action.ZoomToFullSize
+          "Single Page View", Icon.singlePage, Action (Action.ChangePageViewMode PageViewMode.SinglePage)
+          "Frame View", Icon.framedPage, Action (Action.ChangePageViewMode PageViewMode.FramedPage)
+          "Multiple Page View", Icon.multiplePages, Action (Action.ChangePageViewMode PageViewMode.MultiplePages)
+          "Fullscreen View", Icon.fullscreen, Action (Action.ChangePageViewMode PageViewMode.FullScreen)
+          ]
 
     let iconButtonView (name: string, icon: Icon.Size -> string -> IView<Viewbox>, msg) =
         Button.create [

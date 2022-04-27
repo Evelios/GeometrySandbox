@@ -85,7 +85,9 @@ let border = {| thickness = 1.; cornerRadius = 5. |}
 let spacing =
     {| small = 4.
        medium = 8.
-       large = 16. |}
+       large = 16.
+       huge = 64.
+       |}
 
 let size = {| small = 250. |}
 

@@ -27,7 +27,9 @@ let init () : Model * Cmd<Msg> =
     { Size = Size2D.create (Length.cssPixels 600.) (Length.cssPixels 400.)
       Unit = LengthUnit.Pixels
       Seed = 0
-      ViewScale = 1. },
+      ViewScale = 1.
+      PageViewMode = PageViewMode.SinglePage },
+
     Cmd.none
 
 
@@ -35,6 +37,10 @@ let init () : Model * Cmd<Msg> =
 
 let takeAction (action: Action) (model: Model) : Model =
     match action with
+    | Action.ChangePageViewMode pageViewMode ->
+        { model with
+              PageViewMode = pageViewMode }
+
     | Action.ChangeOrientation orientation ->
         { model with
               Size = Size2D.setOrientation orientation model.Size }
@@ -107,7 +113,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
             Properties.view model (PropertiesMsg >> dispatch)
             |> DockPanel.child Dock.Right
 
-            Viewport.view model
+            PageViewModes.view model
         ]
     ]
     :> IView
