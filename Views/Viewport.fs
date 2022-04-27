@@ -8,19 +8,22 @@ open Geometry
 open GeometrySandbox
 
 
-let pictureView size =
+let pictureView height width =
     Canvas.create [
-        Canvas.height (Length.inCssPixels size.Height)
-        Canvas.width (Length.inCssPixels size.Width)
+        Canvas.height height 
+        Canvas.width width
         Canvas.background Theme.palette.pageColor
     ]
 
-let view size : IView =
+let view model : IView =
+    let height =(Length.inCssPixels model.Size.Height) *  model.ViewScale
+    let width = (Length.inCssPixels model.Size.Width) * model.ViewScale
+    
     let pictureWithDropShadow =
         Border.create [
-            Border.height (Length.inCssPixels size.Height)
-            Border.width (Length.inCssPixels size.Width)
-            Border.child (pictureView size)
+            Border.height height
+            Border.width  width
+            Border.child (pictureView height width)
             Border.boxShadow (Theme.boxShadow Theme.palette.canvasBackgroundShadow)
         ]
 

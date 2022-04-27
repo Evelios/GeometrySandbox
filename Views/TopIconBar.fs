@@ -9,26 +9,32 @@ open GeometrySandbox
 open GeometrySandbox.Extensions
 
 type Msg =
+    | Action of Action
     | Save
     | ToggleRuler
 
 let view (dispatch: Msg -> unit) : IView =
-    let iconButtons : IView list =
+    let iconButtons =
         [ "Save", Icon.save, Save
-          "Toggle Ruler", Icon.rulerSquare, ToggleRuler ]
-        |> List.map
-            (fun (name, icon, msg) ->
-                Button.create [
-                    Button.padding Theme.spacing.small
-                    Button.margin Theme.spacing.small
-                    Button.onClick (Event.handleEvent msg >> dispatch)
-                    Button.content (icon Icon.large Theme.palette.primaryLightest)
-                    Button.tip name
-                ]
-                :> IView)
+          "Toggle Ruler", Icon.rulerSquare, ToggleRuler
+          "Zoom In", Icon.zoomIn, Action Action.ZoomIn
+          "Zoom Out", Icon.zoomOut, Action Action.ZoomOut
+          "Zoom Full Size", Icon.zoomReturn, Action Action.ZoomToFullSize ]
+
+    let iconButtonView (name: string, icon: Icon.Size -> string -> IView<Viewbox>, msg) =
+        Button.create [
+            Button.padding Theme.spacing.small
+            Button.margin Theme.spacing.small
+            Button.onClick (Event.handleEvent msg >> dispatch)
+            Button.content (icon Icon.large Theme.palette.primaryLightest)
+            Button.tip name
+        ]
+        :> IView
+
+    let iconButtonViews = List.map iconButtonView iconButtons
 
     StackPanel.create [
         StackPanel.orientation Orientation.Horizontal
-        StackPanel.children iconButtons
+        StackPanel.children iconButtonViews
     ]
     :> IView

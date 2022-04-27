@@ -20,10 +20,14 @@ type Msg =
 
 // ---- Initialize -------------------------------------------------------------
 
+[<Literal>]
+let zoomAmount = 0.1
+
 let init () : Model * Cmd<Msg> =
     { Size = Size2D.create (Length.cssPixels 600.) (Length.cssPixels 400.)
       Unit = LengthUnit.Pixels
-      Seed = 0 },
+      Seed = 0
+      ViewScale = 1. },
     Cmd.none
 
 
@@ -47,9 +51,19 @@ let takeAction (action: Action) (model: Model) : Model =
 
     | Action.ChangeUnit unit -> { model with Unit = unit }
 
+    | Action.ZoomIn ->
+        { model with
+              ViewScale = model.ViewScale + zoomAmount }
+    | Action.ZoomOut ->
+        { model with
+              ViewScale = model.ViewScale - zoomAmount }
+
+    | Action.ZoomToFullSize -> { model with ViewScale = 1. }
+
 
 let topIconBarMsgHandler (msg: TopIconBar.Msg) : Cmd<Msg> =
     match msg with
+    | TopIconBar.Action action -> Cmd.ofMsg (Action action)
     | TopIconBar.Save -> Cmd.none
     | TopIconBar.ToggleRuler -> Cmd.none
 
@@ -93,7 +107,7 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
             Properties.view model (PropertiesMsg >> dispatch)
             |> DockPanel.child Dock.Right
 
-            Viewport.view model.Size
+            Viewport.view model
         ]
     ]
     :> IView
