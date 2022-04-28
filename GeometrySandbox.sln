@@ -1,12 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GeometrySandbox", "GeometrySandbox\GeometrySandbox.fsproj", "{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectFiles", "ProjectFiles", "{BAA2AB79-915F-4FF1-89FC-C009BEB0158B}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
 EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{55BC033A-A683-4D5F-BB9C-A1AA3FDC94A6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GeometrySandbox", "src\GeometrySandbox\GeometrySandbox.fsproj", "{9A78219A-5E02-4DBF-8C51-E4D16E89BD07}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BasicExample", "examples\BasicExample\BasicExample.fsproj", "{B2132BA2-3D88-4909-8B13-F3D5FA4167CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +18,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A78219A-5E02-4DBF-8C51-E4D16E89BD07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A78219A-5E02-4DBF-8C51-E4D16E89BD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A78219A-5E02-4DBF-8C51-E4D16E89BD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A78219A-5E02-4DBF-8C51-E4D16E89BD07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2132BA2-3D88-4909-8B13-F3D5FA4167CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2132BA2-3D88-4909-8B13-F3D5FA4167CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2132BA2-3D88-4909-8B13-F3D5FA4167CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2132BA2-3D88-4909-8B13-F3D5FA4167CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B2132BA2-3D88-4909-8B13-F3D5FA4167CC} = {55BC033A-A683-4D5F-BB9C-A1AA3FDC94A6}
 	EndGlobalSection
 EndGlobal
