@@ -60,10 +60,11 @@ let takeAction (action: Action) (model: Model) : Model =
 
     | Action.ZoomIn ->
         { model with
-              ViewScale = model.ViewScale + zoomAmount }
+              ViewScale = min 1.5 (model.ViewScale + zoomAmount) }
+        
     | Action.ZoomOut ->
         { model with
-              ViewScale = model.ViewScale - zoomAmount }
+              ViewScale = max zoomAmount (model.ViewScale - zoomAmount) }
 
     | Action.ZoomToFullSize -> { model with ViewScale = 1. }
 

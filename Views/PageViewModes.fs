@@ -81,14 +81,16 @@ let view model dispatch : IView =
                 Border.boxShadow (Theme.boxShadowInset Theme.palette.canvasBackgroundShadow)
             ]
         ]
-        DockPanel.onPointerWheelChanged (fun e ->
-            printfn $"{e.Delta}"
-            if e.Delta.Y > 0. then
-                Action Action.ZoomIn  |> dispatch
-            if e.Delta.Y < 0. then
-                Action Action.ZoomOut  |> dispatch
-                
-            )
+        DockPanel.onPointerWheelChanged
+            (fun e ->
+                if e.Delta.Y > 0. then
+                    e.Handled <- true
+                    Action Action.ZoomIn |> dispatch
+
+                else if e.Delta.Y < 0. then
+                    e.Handled <- true
+                    Action Action.ZoomOut |> dispatch
+
+                )
     ]
     :> IView
-    
