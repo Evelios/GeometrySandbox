@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GeometrySandbox", "GeometrySandbox\GeometrySandbox.fsproj", "{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectFiles", "ProjectFiles", "{BAA2AB79-915F-4FF1-89FC-C009BEB0158B}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	README.md = README.md
+EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00F2B85-1DD3-4007-B2F2-D9B1C49C8F84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

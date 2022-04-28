@@ -1,6 +1,6 @@
 [fantomas]: https://github.com/fsprojects/fantomas
-
 [f# formatting]: https://marketplace.visualstudio.com/items?itemName=asti.fantomas-vs
+[fable]: https://fable.io/
 
 # GeometrySandbox
 
@@ -10,7 +10,7 @@ creative works within a beautiful environment but still allow your work to go to
 you want this work to live on a wall, resizing and saving is made easy for you. Let's say that you made an animation and
 want people to be able to see the animation playing online. You can either export the rendering as a video or gif
 format. If you really want to allow the user to have full interaction with the work you are creating, you can even embed
-the code into your website by converting your animation into javascript with [Fable](https://fable.io/).
+the code into your website by converting your animation into javascript with [Fable].
 
 ![Preview of the generative framework gui](./img/GeometrySandbox.png)
 
