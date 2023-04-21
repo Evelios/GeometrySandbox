@@ -19,6 +19,6 @@ the code into your website by converting your animation into javascript with [Fa
 
 To run this application just type
 
-```
+```sh
 dotnet run
 ```

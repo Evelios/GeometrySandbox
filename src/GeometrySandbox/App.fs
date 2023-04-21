@@ -4,7 +4,8 @@ open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 open Elmish
-open Geometry
+open Math.Geometry
+open Math.Units
 
 open GeometrySandbox.Views
 open GeometrySandbox.Extensions
@@ -40,19 +41,19 @@ let takeAction (action: Action) (model: Model) : Model =
     match action with
     | Action.ChangePageViewMode pageViewMode ->
         { model with
-              PageViewMode = pageViewMode }
+            PageViewMode = pageViewMode }
 
     | Action.ChangeOrientation orientation ->
         { model with
-              Size = Size2D.setOrientation orientation model.Size }
+            Size = Size2D.setOrientation orientation model.Size }
 
     | Action.ChangeHeight height ->
         { model with
-              Size = Size2D.setHeight (Length.ofUnit model.Unit height) model.Size }
+            Size = Size2D.setHeight (Length.ofUnit model.Unit height) model.Size }
 
     | Action.ChangeWidth width ->
         { model with
-              Size = Size2D.setWidth (Length.ofUnit model.Unit width) model.Size }
+            Size = Size2D.setWidth (Length.ofUnit model.Unit width) model.Size }
 
     | Action.ChangeSeed seed -> { model with Seed = seed }
 
@@ -60,11 +61,11 @@ let takeAction (action: Action) (model: Model) : Model =
 
     | Action.ZoomIn ->
         { model with
-              ViewScale = min 1.5 (model.ViewScale + zoomAmount) }
-        
+            ViewScale = min 1.5 (model.ViewScale + zoomAmount) }
+
     | Action.ZoomOut ->
         { model with
-              ViewScale = max zoomAmount (model.ViewScale - zoomAmount) }
+            ViewScale = max zoomAmount (model.ViewScale - zoomAmount) }
 
     | Action.ZoomToFullSize -> { model with ViewScale = 1. }
 
@@ -110,17 +111,15 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
 
 
 let view (model: Model) (dispatch: Msg -> unit) : IView =
-    DockPanel.create [
-        DockPanel.background Theme.palette.panelBackground
-        DockPanel.children [
 
-            TopIconBar.view (TopIconBarMsg >> dispatch)
-            |> DockPanel.child Dock.Top
+    DockPanel.create
+        [ DockPanel.background Theme.palette.panelBackground
+          DockPanel.children
+              [
 
-            Properties.view model (PropertiesMsg >> dispatch)
-            |> DockPanel.child Dock.Right
+                TopIconBar.view (TopIconBarMsg >> dispatch) |> DockPanel.child Dock.Top
 
-            PageViewModes.view model (PageViewModesMsg >> dispatch)
-        ]
-    ]
+                Properties.view model (PropertiesMsg >> dispatch) |> DockPanel.child Dock.Right
+
+                PageViewModes.view model (PageViewModesMsg >> dispatch) ] ]
     :> IView

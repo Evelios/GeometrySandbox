@@ -5,6 +5,7 @@ open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 
 open GeometrySandbox
+open GeometrySandbox.Extensions
 
 
 let child dir (child: IView) =

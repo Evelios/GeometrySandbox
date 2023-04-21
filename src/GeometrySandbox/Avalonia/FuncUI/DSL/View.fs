@@ -26,24 +26,23 @@ let withAttrs (attrs: IAttr<'view> list) (view: IView<'view>) =
     :> IView<'view>
 
 /// Try to find a child control of a given name using breadth first search
-let findChildControl (name: string) (source: IControl) : IControl option =
+let findChildControl (name: string) (source: Control) : Control option =
     let rec findChildControlHelper (children: ILogical list) =
         match children with
         | first :: remaining ->
-            if (first :?> IControl).Name = name then
-                Some(first :?> IControl)
+            if (first :?> Control).Name = name then
+                Some(first :?> Control)
             else
                 findChildControlHelper (remaining @ (List.ofSeq first.LogicalChildren))
 
         | [] -> None
 
-    findChildControlHelper (List.ofSeq source.LogicalChildren)
+    findChildControlHelper (List.ofSeq (source.GetLogicalChildren()))
 
 /// Traverse to the root of the tree and do a breadth first search for the element
-let findControl (name: String) (source: IControl) : IControl option =
-    if source.Name = name then
-        Some source
-    else if source.VisualRoot = null then
-        None
-    else
-        findChildControl name (source.VisualRoot :?> IControl)
+let findControl (name: String) (source: Control) : Control option =
+    // if source.Name = name then Some source
+    // else if source.VisualRoot = null then None
+    // else findChildControl name (source.Visual :?> Control)
+    // TODO: Avalonia update needs new solution to getting parent control
+    None

@@ -1,6 +1,7 @@
 namespace GeometrySandbox
 
-open Geometry
+open Math.Geometry
+open Math.Units
 
 // ---- Top Level Types --------------------------------------------------------
 

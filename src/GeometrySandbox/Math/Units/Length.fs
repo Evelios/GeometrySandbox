@@ -1,11 +1,11 @@
-module GeometrySandbox.Extensions.Length
+module Math.Units.Length
 
-open Geometry
+open Math.Units
 
 open GeometrySandbox
 
 
-let inUnit (unit: LengthUnit) (length: Length<Meters>) : float =
+let inUnit (unit: LengthUnit) (length: Length) : float =
     length
     |> match unit with
        | LengthUnit.Pixels -> Length.inCssPixels
@@ -15,7 +15,7 @@ let inUnit (unit: LengthUnit) (length: Length<Meters>) : float =
        | LengthUnit.Centimeters -> Length.inCentimeters
        | LengthUnit.Millimeters -> Length.inMillimeters
 
-let ofUnit (unit: LengthUnit) (amount: float) : Length<Meters> =
+let ofUnit (unit: LengthUnit) (amount: float) : Length =
     amount
     |> match unit with
        | LengthUnit.Pixels -> Length.cssPixels

@@ -20,7 +20,7 @@ let positionRelativeTo (name: String) (event: PointerEventArgs) =
     event.Handled <- true
 
     let maybeVisual =
-        View.findControl name (event.Source :?> IControl)
+        View.findControl name (event.Source :?> Control)
 
     match maybeVisual with
     | Some visual -> event.GetPosition(visual)
