@@ -3,7 +3,6 @@ module GeometrySandbox.Views.PageViewModes
 open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
-open Avalonia.Input
 open Avalonia.Media
 open Math.Geometry
 open Math.Units
@@ -15,12 +14,14 @@ type Msg = Action of Action
 
 // ---- Internal Functions ----
 
-let page canvasSize viewSize : IView =
+let page (generator: SimpleGenerator) canvasSize viewSize : IView =
     let viewHeight, viewWidth =
         viewSize |> Size2D.dimensions |> Tuple2.mapBoth Length.inCssPixels
 
     let canvasHeight, canvasWidth =
         canvasSize |> Size2D.dimensions |> Tuple2.mapBoth Length.inCssPixels
+
+    let canvasContent = generator ()
 
     let canvasView =
         Viewbox.create
@@ -31,7 +32,8 @@ let page canvasSize viewSize : IView =
                   Canvas.create
                       [ Canvas.height canvasHeight
                         Canvas.width canvasWidth
-                        Canvas.background Theme.palette.pageColor ]
+                        Canvas.background Theme.palette.pageColor
+                        Canvas.children [ canvasContent ] ]
               ) ]
 
     Border.create
@@ -42,11 +44,11 @@ let page canvasSize viewSize : IView =
           Border.margin Theme.spacing.large ]
     :> IView
 
-let multiplePageView model : IView =
+let multiplePageView generator model : IView =
     let pageScale = 1. / 3.
     let numPages = 10
 
-    let singlePage = page model.Size (Size2D.scale pageScale model.Size)
+    let singlePage = page generator model.Size (Size2D.scale pageScale model.Size)
 
     let pages = List.replicate numPages singlePage
 
@@ -54,13 +56,13 @@ let multiplePageView model : IView =
 
 // ---- Page Views ----
 
-let view model dispatch : IView =
+let view (generator: SimpleGenerator) (model: Model) (dispatch: Msg -> unit) : IView =
     let pageView =
         match model.PageViewMode with
-        | PageViewMode.SinglePage -> page model.Size (Size2D.scale model.ViewScale model.Size)
-        | PageViewMode.MultiplePages -> multiplePageView model
-        | PageViewMode.FramedPage -> page model.Size (Size2D.scale model.ViewScale model.Size)
-        | PageViewMode.FullScreen -> page model.Size (Size2D.scale model.ViewScale model.Size)
+        | PageViewMode.SinglePage -> page generator model.Size (Size2D.scale model.ViewScale model.Size)
+        | PageViewMode.MultiplePages -> multiplePageView generator model
+        | PageViewMode.FramedPage -> page generator model.Size (Size2D.scale model.ViewScale model.Size)
+        | PageViewMode.FullScreen -> page generator model.Size (Size2D.scale model.ViewScale model.Size)
 
     DockPanel.create
         [ DockPanel.background Theme.palette.canvasBackground

@@ -1,11 +1,14 @@
 ﻿module GeometrySandbox.App
 
 open Avalonia.Controls
+open Avalonia.Controls.Shapes
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 open Elmish
 open Math.Geometry
+open Math.Geometry.Avalonia
 open Math.Units
+open Math.Units.Interval
 
 open GeometrySandbox.Views
 open GeometrySandbox.Extensions
@@ -24,6 +27,25 @@ type Msg =
 
 [<Literal>]
 let zoomAmount = 0.1
+
+let generator (size: Size2D<Meters>) () : IView =
+    let margin = Length.inches 1.
+
+    let lineFromX x =
+        LineSegment2D.from (Point2D.xy x margin) (Point2D.xy x (size.Height - margin))
+
+    let startPoints = Interval.linspace margin (size.Width - margin) 100
+
+    let verticalLines = Seq.map lineFromX startPoints
+
+    let drawLine line : IView =
+        Line.draw line [ Line.strokeThickness 2.; Line.stroke "#000000" ]
+
+    let drawnLines: IView list = Seq.map drawLine verticalLines |> Seq.toList
+
+    Canvas.create [ Canvas.children drawnLines ]
+
+
 
 let init () : Model * Cmd<Msg> =
     { Size = Size2D.create (Length.cssPixels 600.) (Length.cssPixels 400.)
@@ -121,5 +143,5 @@ let view (model: Model) (dispatch: Msg -> unit) : IView =
 
                 Properties.view model (PropertiesMsg >> dispatch) |> DockPanel.child Dock.Right
 
-                PageViewModes.view model (PageViewModesMsg >> dispatch) ] ]
+                PageViewModes.view (generator model.Size) model (PageViewModesMsg >> dispatch) ] ]
     :> IView

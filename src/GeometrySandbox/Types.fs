@@ -3,7 +3,11 @@ namespace GeometrySandbox
 open Math.Geometry
 open Math.Units
 
-// ---- Top Level Types --------------------------------------------------------
+// ---- Library Types ----------------------------------------------------------
+
+open Avalonia.FuncUI.Types
+
+type SimpleGenerator = unit -> IView
 
 [<RequireQualifiedAccess>]
 type LengthUnit =
@@ -19,6 +23,8 @@ type Orientation =
     | Portrait
 
 type Seed = int
+
+// ---- Top Level Gui Types ----------------------------------------------------
 
 [<RequireQualifiedAccess>]
 type PageViewMode =

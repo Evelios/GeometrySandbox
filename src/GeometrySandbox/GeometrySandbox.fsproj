@@ -7,15 +7,24 @@
 
   <ItemGroup>
     <Compile Include="Types.fs" />
+    <Compile Include="Plotter\Types.fs" />
+    <Compile Include="Plotter\Canvas.fs" />
+    <Compile Include="Plotter\Pen.fs" />
+    <Compile Include="Plotter\Layer.fs" />
+    <Compile Include="Plotter\Plotter.fs" />
     <Compile Include="Avalonia\FuncUI\DSL\WrapPanel.fs" />
     <Compile Include="Avalonia\FuncUI\DSL\View.fs" />
+    <Compile Include="Avalonia\FuncUI\DSL\ViewBuilder.fs" />
     <Compile Include="Math\Units\Length.fs" />
+    <Compile Include="Math\Units\Interval.fs" />
     <Compile Include="Math\Geometry\Size2D.fs" />
+    <Compile Include="Math\Geometry\Avalonia.fs" />
+    <Compile Include="Math\Geometry\LineSegment2D.fs" />
+    <Compile Include="Math\Noise\GradientNoise.fs" />
     <Compile Include="Extensions\Color.fs" />
     <Compile Include="Extensions\Event.fs" />
     <Compile Include="Extensions\DiscriminatedUnion.fs" />
     <Compile Include="Extensions\String.fs" />
-    <Compile Include="Extensions\Svg.fs" />
     <Compile Include="Extensions\Tuple.fs" />
     <Compile Include="Theme.fs" />
     <Compile Include="Views\Text.fs" />
