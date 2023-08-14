@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Plotter.fs" />
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsCheck.NUnit" Version="2.16.6" />
+      <PackageReference Include="Math.Geometry" Version="0.1.136" />
+      <PackageReference Include="Math.Units" Version="0.1.149" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\PenPlotter\PenPlotter.fsproj" />
+    </ItemGroup>
+
+</Project>

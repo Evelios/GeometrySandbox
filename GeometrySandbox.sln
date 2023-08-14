@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DC207CE9-A
 		docs\Index.fsx = docs\Index.fsx
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PenPlotter.Tests", "test\PenPlotter.Tests\PenPlotter.Tests.fsproj", "{216E241A-CBCE-45FA-BDBD-8DD54D243261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{B5BD0305-DD87-4082-85AC-85FCB9CD387A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5BD0305-DD87-4082-85AC-85FCB9CD387A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5BD0305-DD87-4082-85AC-85FCB9CD387A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216E241A-CBCE-45FA-BDBD-8DD54D243261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{216E241A-CBCE-45FA-BDBD-8DD54D243261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{216E241A-CBCE-45FA-BDBD-8DD54D243261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{216E241A-CBCE-45FA-BDBD-8DD54D243261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
