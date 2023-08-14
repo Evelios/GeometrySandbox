@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="Types.fs" />
+      <Compile Include="Canvas.fs" />
+      <Compile Include="Pen.fs" />
+      <Compile Include="Layer.fs" />
+      <Compile Include="Plotter.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Math.Geometry" Version="0.1.136" />
+      <PackageReference Include="Math.Units" Version="0.1.149" />
+    </ItemGroup>
+
+</Project>

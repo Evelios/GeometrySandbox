@@ -1,4 +1,4 @@
-﻿namespace Plotter
+﻿namespace PenPlotter
 
 open Math.Units
 
@@ -18,3 +18,7 @@ module Pen =
             | Color color -> { pen with Color = color }
 
         Seq.fold attributeAssignment defaultPen attrs
+
+    let thickness (length: Length) : Attribute = Thickness length
+
+    let color (color: string) : Attribute = Color color

@@ -1,4 +1,4 @@
-﻿namespace Plotter
+﻿namespace PenPlotter
 
 type Plotter = { Canvas: Canvas; Layers: Layer seq }
 
