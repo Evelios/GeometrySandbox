@@ -38,11 +38,17 @@ module GeometryToSharpVG =
 
     /// TODO: take care of inner loop geometry
     let toPolygon (polygon: Polygon2D<Meters, 'Coordinates>) : SharpVG.Polygon =
+        if not <| polygon.InnerLoops.IsEmpty then
+            failwith "Inner loops within Polygon2D are not generated into Svg currently."
+            
         List.map toPoint (Polygon2D.outerLoop polygon) |> Polygon.ofSeq
-
 
     let bboxToRectangle (bbox: BoundingBox2D<Meters, 'Coordinates>) : SharpVG.Rect =
         Rectangle2D.fromBoundingBox bbox |> toRectangle
+        
+    let toPolyline (polyline: Polyline2D<Meters, 'Coordinates>) : SharpVG.Polyline =
+        List.map toPoint (Polyline2D.vertices polyline) |> Polyline.ofSeq
+
 
 /// Create an Svg style based on the pen that is being used
 let styleFromPen (pen: PenPlotter.Pen) : SharpVG.Style =
@@ -66,6 +72,8 @@ let fromGeometry (pen: PenPlotter.Pen) (geometry: IGeometry) : Element =
         GeometryToSharpVG.bboxToRectangle bbox |> Element.createWithStyle style
 
     | :? Polygon2D<Meters, Cartesian> as polygon -> GeometryToSharpVG.toPolygon polygon |> Element.createWithStyle style
+    
+    | :? Polyline2D<Meters, Cartesian> as polyline -> GeometryToSharpVG.toPolyline polyline |> Element.createWithStyle style
 
     | _ ->
         failwith (

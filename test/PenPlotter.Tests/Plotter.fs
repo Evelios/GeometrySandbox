@@ -76,3 +76,18 @@ let ``Polygon2D outer circle to SVG`` () =
         ]
 
     testGeometry geom expected
+    
+[<Test>]
+let ``Polyline2D to SVG`` () =
+    let expected: string =
+        """<polyline stroke="black" stroke-width="2" opacity="1" points="10,20 30,40 50,60 70,80"/>"""
+
+    let geom: Polyline2D<Meters, Cartesian> =
+        Polyline2D.fromVertices [
+            Point2D.pixels 10. 20.
+            Point2D.pixels 30. 40.
+            Point2D.pixels 50. 60.
+            Point2D.pixels 70. 80.
+        ]
+
+    testGeometry geom expected
