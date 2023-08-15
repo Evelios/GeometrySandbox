@@ -11,6 +11,7 @@
       <Compile Include="Pen.fs" />
       <Compile Include="Layer.fs" />
       <Compile Include="Plotter.fs" />
+      <Compile Include="Svg.fs" />
     </ItemGroup>
 
     <ItemGroup>
