@@ -28,7 +28,7 @@ module GeometryToSharpVG =
         let radius = toLength circle.Radius
         Circle.create center radius
 
-    let toArea (size: Size2D<Meters>) : SharpVG.Area =
+    let toArea (size: Size2D<Meters, 'Coordinates>) : SharpVG.Area =
         Area.ofFloats (unwrapLength size.Width, unwrapLength size.Height)
 
     let toRectangle (rectangle: Rectangle2D<Meters, 'Coordinates>) : SharpVG.Rect =
@@ -57,37 +57,45 @@ let styleFromPen (pen: PenPlotter.Pen) : SharpVG.Style =
     Style.empty |> Style.withStrokePen svgPen
 
 /// Create an SVG based on a pen and the input geometry.
-/// This needs to be used with the Cartesian coordinate system.
+/// This needs to be used with the SvgCoordinates coordinate system.
 let fromGeometry (pen: PenPlotter.Pen) (geometry: IGeometry) : Element =
     let style = styleFromPen pen
 
     match geometry with
-    | :? Line2D<Meters, Cartesian> as line -> GeometryToSharpVG.toLine line |> Element.createWithStyle style
+    | :? Line2D<Meters, SvgCoordinates> as line -> GeometryToSharpVG.toLine line |> Element.createWithStyle style
+
     | :? Line2D<Meters, obj> as line -> GeometryToSharpVG.toLine line |> Element.createWithStyle style
 
-    | :? Circle2D<Meters, Cartesian> as circle -> GeometryToSharpVG.toCircle circle |> Element.createWithStyle style
+    | :? Circle2D<Meters, SvgCoordinates> as circle ->
+        GeometryToSharpVG.toCircle circle |> Element.createWithStyle style
+
     | :? Circle2D<Meters, obj> as circle -> GeometryToSharpVG.toCircle circle |> Element.createWithStyle style
 
-    | :? Rectangle2D<Meters, Cartesian> as rect -> GeometryToSharpVG.toRectangle rect |> Element.createWithStyle style
+    | :? Rectangle2D<Meters, SvgCoordinates> as rect ->
+        GeometryToSharpVG.toRectangle rect |> Element.createWithStyle style
+
     | :? Rectangle2D<Meters, obj> as rect -> GeometryToSharpVG.toRectangle rect |> Element.createWithStyle style
 
-    | :? BoundingBox2D<Meters, Cartesian> as bbox ->
+    | :? BoundingBox2D<Meters, SvgCoordinates> as bbox ->
         GeometryToSharpVG.bboxToRectangle bbox |> Element.createWithStyle style
 
     | :? BoundingBox2D<Meters, obj> as bbox -> GeometryToSharpVG.bboxToRectangle bbox |> Element.createWithStyle style
 
-    | :? Polygon2D<Meters, Cartesian> as polygon -> GeometryToSharpVG.toPolygon polygon |> Element.createWithStyle style
+    | :? Polygon2D<Meters, SvgCoordinates> as polygon ->
+        GeometryToSharpVG.toPolygon polygon |> Element.createWithStyle style
+
     | :? Polygon2D<Meters, obj> as polygon -> GeometryToSharpVG.toPolygon polygon |> Element.createWithStyle style
 
-    | :? Polyline2D<Meters, Cartesian> as polyline ->
+    | :? Polyline2D<Meters, SvgCoordinates> as polyline ->
         GeometryToSharpVG.toPolyline polyline |> Element.createWithStyle style
+
     | :? Polyline2D<Meters, obj> as polyline -> GeometryToSharpVG.toPolyline polyline |> Element.createWithStyle style
 
     | _ ->
         failwith (
             "Unable to create SVG from geometry.\n"
-            + " This can be caused by not using the Cartesian coordinate system:\n"
-            + $"{geometry}"
+            + " This can be caused by not using the SvgCoordinates coordinate system:\n"
+            + $"{geometry.GetType()}: {geometry}"
         )
 
 /// Create an Svg group of geometries all bundled under the same tag

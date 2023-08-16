@@ -2,6 +2,7 @@ namespace GeometrySandbox
 
 open Math.Geometry
 open Math.Units
+open PenPlotter
 
 // ---- Library Types ----------------------------------------------------------
 
@@ -48,7 +49,7 @@ type Action =
 // ---- UI Models --------------------------------------------------------------
 
 type Model =
-    { Size: Size2D<Meters>
+    { Size: Size2D<Meters, Cartesian>
       Unit: LengthUnit
       Seed: int
       ViewScale: float

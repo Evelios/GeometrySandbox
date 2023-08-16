@@ -28,7 +28,7 @@ type Msg =
 [<Literal>]
 let zoomAmount = 0.1
 
-let generator (size: Size2D<Meters>) () : IView =
+let generator (size: Size2D<Meters, 'Coordinates>) () : IView =
     let margin = Length.inches 1.
 
     let lineFromX x =

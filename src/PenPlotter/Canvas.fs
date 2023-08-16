@@ -4,14 +4,14 @@ open Math.Units
 open Math.Geometry
 
 type Canvas =
-    { Size: Size2D<Meters>; Margin: Length }
+    { Size: Size2D<Meters, 'Coordinates>; Margin: Length }
 
 module Canvas =
     /// Create a canvas of a size with padding around the borders to create a margin where nothing is drawn.
-    let create (size: Size2D<Meters>) (margin: Length) : Canvas = { Size = size; Margin = margin }
+    let create (size: Size2D<Meters, 'Coordinates>) (margin: Length) : Canvas = { Size = size; Margin = margin }
 
     /// Create a canvas of a size without any margins.
-    let withSize (size: Size2D<Meters>) : Canvas = { Size = size; Margin = Length.zero }
+    let withSize (size: Size2D<Meters, 'Coordinates>) : Canvas = { Size = size; Margin = Length.zero }
 
     /// The total height of the canvas including the margins
     let height (canvas: Canvas) : Length = canvas.Size.Height
@@ -29,7 +29,7 @@ module Canvas =
     module Size =
         /// Create a size with a particular orientation. This is a helper
         /// function that makes it easier to create default page sizes.
-        let private withOrientation (orientation: Orientation) (side1: Length) (side2: Length) : Size2D<Meters> =
+        let private withOrientation (orientation: Orientation) (side1: Length) (side2: Length) : Size2D<Meters, 'Coordinates> =
             let min = Length.min side1 side2
             let max = Length.max side1 side2
 
@@ -37,5 +37,5 @@ module Canvas =
             | Orientation.Portrait -> Size2D.create min max
             | Orientation.Landscape -> Size2D.create max min
 
-        let a4 (orientation: Orientation) : Size2D<Meters> =
+        let a4 (orientation: Orientation) : Size2D<Meters, 'Coordinates> =
             withOrientation orientation (Length.millimeters 1189) (Length.millimeters 841)
