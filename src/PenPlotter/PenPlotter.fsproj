@@ -10,12 +10,12 @@
       <Compile Include="Canvas.fs" />
       <Compile Include="Pen.fs" />
       <Compile Include="Layer.fs" />
-      <Compile Include="Plotter.fs" />
       <Compile Include="Svg.fs" />
+      <Compile Include="Plotter.fs" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Math.Geometry" Version="0.1.139" />
+      <PackageReference Include="Math.Geometry" Version="0.1.141" />
       <PackageReference Include="Math.Units" Version="0.1.149" />
       <PackageReference Include="SharpVG" Version="0.0.16" />
       <PackageReference Update="FSharp.Core" Version="7.0.400" />

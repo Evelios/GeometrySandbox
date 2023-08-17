@@ -3,7 +3,7 @@
 open Math.Geometry
 
 
-type Layer = { Pen: Pen; Geometry: IGeometry seq }
+type Layer = { Pen: Pen; Geometry: IGeometry<Cartesian> seq }
 
 module Layer =
-    let withPen (pen: Pen) (geometry: IGeometry seq) : Layer = { Pen = pen; Geometry = geometry }
+    let withPen (pen: Pen) (geometry: IGeometry<Cartesian> seq) : Layer = { Pen = pen; Geometry = geometry }
