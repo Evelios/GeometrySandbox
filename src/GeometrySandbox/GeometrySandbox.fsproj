@@ -44,8 +44,8 @@
     <PackageReference Include="Avalonia.FuncUI.Elmish" Version="1.0.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.3" />
     <PackageReference Update="FSharp.Core" Version="7.0.400" />
-    <PackageReference Include="Math.Geometry" Version="0.1.141" />
-    <PackageReference Include="Math.Units" Version="0.1.149" />
+    <PackageReference Include="Math.Geometry" Version="0.1.145" />
+    <PackageReference Include="Math.Units" Version="0.1.164" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="App.fs" />
+        <Content Include="global.json" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Fable.Browser.Dom" Version="2.14.0" />
@@ -11,5 +12,9 @@
         <PackageReference Include="Fable.Elmish" Version="4.0.2" />
         <PackageReference Include="Fable.Elmish.React" Version="4.0.0" />
         <PackageReference Include="Feliz" Version="2.6.0" />
+        <PackageReference Update="FSharp.Core" Version="7.0.400" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\PenPlotter\PenPlotter.fsproj" />
     </ItemGroup>
 </Project>

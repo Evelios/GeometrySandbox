@@ -28,11 +28,16 @@ module Plotter =
         (geometry: IGeometry<Cartesian>)
         : IGeometry<SvgCoordinates> =
         match geometry with
-        | :? LineSegment2D<Meters, Cartesian> as line -> LineSegment2D.relativeTo conversionFrame line
-        | :? Circle2D<Meters, Cartesian> as circle -> Circle2D.relativeTo conversionFrame circle
-        | :? Rectangle2D<Meters, Cartesian> as rect -> Rectangle2D.relativeTo conversionFrame rect
-        | :? Polygon2D<Meters, Cartesian> as polygon -> Polygon2D.relativeTo conversionFrame polygon
-        | :? Polyline2D<Meters, Cartesian> as polyline -> Polyline2D.relativeTo conversionFrame polyline
+        | :? LineSegment2D<Meters, Cartesian> as line ->
+            LineSegment2D.relativeTo conversionFrame line :> IGeometry<SvgCoordinates>
+        | :? Circle2D<Meters, Cartesian> as circle ->
+            Circle2D.relativeTo conversionFrame circle :> IGeometry<SvgCoordinates>
+        | :? Rectangle2D<Meters, Cartesian> as rect ->
+            Rectangle2D.relativeTo conversionFrame rect :> IGeometry<SvgCoordinates>
+        | :? Polygon2D<Meters, Cartesian> as polygon ->
+            Polygon2D.relativeTo conversionFrame polygon :> IGeometry<SvgCoordinates>
+        | :? Polyline2D<Meters, Cartesian> as polyline ->
+            Polyline2D.relativeTo conversionFrame polyline :> IGeometry<SvgCoordinates>
 
         | _ ->
             failwith (
@@ -77,5 +82,6 @@ module Plotter =
                 (Svg.GeometryToSharpVG.toArea plotter.Canvas.Size)
 
         Svg.ofGroup layerGroup |> Svg.withViewBox viewBox
+
 
     let toSvg (plotter: Plotter) : string = Svg.toString (fromPlotter plotter)

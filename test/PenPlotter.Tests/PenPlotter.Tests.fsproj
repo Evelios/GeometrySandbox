@@ -12,8 +12,8 @@
 
     <ItemGroup>
       <PackageReference Include="FsCheck.NUnit" Version="2.16.6" />
-      <PackageReference Include="Math.Geometry" Version="0.1.141" />
-      <PackageReference Include="Math.Units" Version="0.1.149" />
+      <PackageReference Include="Math.Geometry" Version="0.1.145" />
+      <PackageReference Include="Math.Units" Version="0.1.164" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
       <PackageReference Update="FSharp.Core" Version="7.0.400" />
     </ItemGroup>

@@ -3,6 +3,7 @@ module App
 open Elmish
 open Elmish.React
 open Feliz
+open PenPlotter
 
 // MODEL
 
