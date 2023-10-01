@@ -13,8 +13,6 @@
         <PackageReference Include="Fable.Elmish.React" Version="4.0.0" />
         <PackageReference Include="Feliz" Version="2.6.0" />
         <PackageReference Update="FSharp.Core" Version="7.0.400" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\..\PenPlotter\PenPlotter.fsproj" />
+        <PackageReference Include="SharpVG" Version="0.0.16" />
     </ItemGroup>
 </Project>

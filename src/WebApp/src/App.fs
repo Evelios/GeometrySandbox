@@ -3,7 +3,7 @@ module App
 open Elmish
 open Elmish.React
 open Feliz
-open PenPlotter
+open SharpVG
 
 // MODEL
 
@@ -24,10 +24,18 @@ let update (msg: Msg) (model: Model) =
 
 // VIEW (rendered with React)
 
-let view (model: Model) dispatch =
-    Html.div [
-        Html.h1 "This is my Feliz-Fable App!"
-    ]
+let svgView: ReactElement =
+    let position = Point.ofInts (10, 10)
+    let area = Area.ofInts (50, 50)
+
+    let style =
+        Style.create (Color.ofName Colors.Cyan) (Color.ofName Colors.Blue) (Length.ofInt 3) 1.0 1.0
+
+    let svgElement = Rect.create position area |> Element.createWithStyle style
+
+    Html.div [ prop.dangerouslySetInnerHTML $"{svgElement}" ]
+
+let view (model: Model) dispatch = Html.div [ svgView ]
 
 // App
 Program.mkSimple init update view

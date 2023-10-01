@@ -29,6 +29,7 @@
     <Compile Include="Views\TopIconBar.fs" />
     <Compile Include="Views\Properties.fs" />
     <Compile Include="Views\PageViewModes.fs" />
+    <Compile Include="Views\Plotter.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{8C2572
 		src\WebApp\package.json = src\WebApp\package.json
 		src\WebApp\README.md = src\WebApp\README.md
 		src\WebApp\webpack.config.js = src\WebApp\webpack.config.js
+		src\WebApp\.config\dotnet-tools.json = src\WebApp\.config\dotnet-tools.json
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "src\WebApp\src\App.fsproj", "{19C87E5A-BA71-48FB-A414-95304A427052}"
