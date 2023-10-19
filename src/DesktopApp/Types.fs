@@ -8,7 +8,7 @@ open PenPlotter
 
 open Avalonia.FuncUI.Types
 
-type SimpleGenerator = unit -> IView
+type SimpleGenerator = unit -> IGeometry<Cartesian> seq
 
 [<RequireQualifiedAccess>]
 type LengthUnit =

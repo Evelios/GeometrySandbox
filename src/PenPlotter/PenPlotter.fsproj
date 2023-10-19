@@ -7,14 +7,16 @@
 
     <ItemGroup>
       <Compile Include="Types.fs" />
+      <Compile Include="CoordinateConversion.fs" />
       <Compile Include="Canvas.fs" />
       <Compile Include="Pen.fs" />
       <Compile Include="Layer.fs" />
-      <Compile Include="Svg.fs" />
       <Compile Include="Plotter.fs" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
+      <PackageReference Include="Avalonia.FuncUI" Version="1.0.1" />
       <PackageReference Include="Math.Geometry" Version="0.1.145" />
       <PackageReference Include="Math.Units" Version="0.1.164" />
       <PackageReference Include="SharpVG" Version="0.0.16" />

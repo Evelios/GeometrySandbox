@@ -1,4 +1,4 @@
-﻿module GeometrySandbox.App
+﻿module DesktopApp.App
 
 open Avalonia.Controls
 open Avalonia.Controls.Shapes

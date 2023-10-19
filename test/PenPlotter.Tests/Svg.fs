@@ -12,7 +12,7 @@ let Setup () = ()
 
 
 let testGeometry (geom: IGeometry<SvgCoordinates>) (expected: string) : unit =
-    let pen = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color 0x000000 ]
+    let pen = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color "0x000000" ]
     let elementToString (ele: Element) : string = $"{ele}"
     let actual = Svg.fromGeometry pen geom |> elementToString
     Assert.AreEqual(expected, actual)
@@ -102,7 +102,7 @@ let ``Group of LineSegment2D to SVG`` () =
         [ LineSegment2D.from (Point2D.pixels 10. 20.) (Point2D.pixels 30. 40.)
           LineSegment2D.from (Point2D.pixels 50. 60.) (Point2D.pixels 70. 80.) ]
 
-    let pen = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color 0x000000 ]
+    let pen = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color "0x000000" ]
     let elementToString (ele: Group) : string = $"{ele}"
     let actual = Svg.fromGeometries pen geoms |> elementToString
 
@@ -147,7 +147,7 @@ let ``Plotter from Cartesian to full Svg file`` () =
         Canvas.create (Size2D.create (Length.cssPixels 200.) (Length.cssPixels 400)) (Length.cssPixels 20.)
 
 
-    let black = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color 0x000000 ]
+    let black = Pen.create [ Pen.thickness (Length.cssPixels 2); Pen.color "0x000000" ]
 
     let layer1: Layer =
         Layer.withPen
@@ -155,7 +155,7 @@ let ``Plotter from Cartesian to full Svg file`` () =
             [ LineSegment2D.from (Point2D.pixels 10. 20.) (Point2D.pixels 30. 40.)
               LineSegment2D.from (Point2D.pixels 50. 60.) (Point2D.pixels 70. 80.) ]
 
-    let white = Pen.create [ Pen.thickness (Length.cssPixels 3); Pen.color 0XFFFFFF ]
+    let white = Pen.create [ Pen.thickness (Length.cssPixels 3); Pen.color "0XFFFFFF" ]
 
     let layer2: Layer =
         Layer.withPen

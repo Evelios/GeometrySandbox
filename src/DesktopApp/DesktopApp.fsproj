@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>DesktopApp</AssemblyName>
+    <RootNamespace>DesktopApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +23,8 @@
     <Compile Include="Extensions\DiscriminatedUnion.fs" />
     <Compile Include="Extensions\String.fs" />
     <Compile Include="Extensions\Tuple.fs" />
+    <Compile Include="PenPlotter\Svg.fs" />
+    <Compile Include="PenPlotter\Avalonia.fs" />
     <Compile Include="Theme.fs" />
     <Compile Include="Views\Text.fs" />
     <Compile Include="Views\Form.fs" />
@@ -29,7 +33,6 @@
     <Compile Include="Views\TopIconBar.fs" />
     <Compile Include="Views\Properties.fs" />
     <Compile Include="Views\PageViewModes.fs" />
-    <Compile Include="Views\Plotter.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -39,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
     <PackageReference Include="Avalonia.Diagnostics" Version="11.0.3" />
     <PackageReference Include="Avalonia.FuncUI" Version="1.0.1" />
     <PackageReference Include="Avalonia.FuncUI.Elmish" Version="1.0.1" />

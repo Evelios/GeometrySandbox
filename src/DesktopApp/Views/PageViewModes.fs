@@ -8,6 +8,7 @@ open Math.Geometry
 open Math.Units
 
 open GeometrySandbox
+open GeometrySandbox.Views
 open GeometrySandbox.Extensions
 
 type Msg = Action of Action
@@ -21,7 +22,9 @@ let page (generator: SimpleGenerator) canvasSize viewSize : IView =
     let canvasHeight, canvasWidth =
         canvasSize |> Size2D.dimensions |> Tuple2.mapBoth Length.inCssPixels
 
-    let canvasContent = generator ()
+    let canvasContent =
+        generator ()
+        |>  Plotter.fromGeometries
 
     let canvasView =
         Viewbox.create
