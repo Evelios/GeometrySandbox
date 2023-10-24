@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <Compile Include="Types.fs" />
-      <Compile Include="CoordinateConversion.fs" />
+      <Compile Include="Geometery.fs" />
       <Compile Include="Canvas.fs" />
       <Compile Include="Pen.fs" />
       <Compile Include="Layer.fs" />

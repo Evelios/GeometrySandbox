@@ -23,6 +23,19 @@ module Canvas =
     let withMargin (margin: Length) (canvas: Canvas<'Coordinates>) : Canvas<'Coordinates> =
         { canvas with Margin = margin }
 
+    let mapGeometry
+        (map: IGeometry<'ACoordinates> -> IGeometry<'BCoordinates>)
+        (canvas: Canvas<'ACoordinates>)
+        : Canvas<'BCoordinates> =
+        { Size = canvas.Size :> IGeometry<'ACoordinates> |> map :?> Size2D<Meters, 'BCoordinates>
+          Margin =
+            // Converting the length into a vector allows it to be translated into 'BCoordinates
+            Vector2D.xy canvas.Margin canvas.Margin |> map :?> Vector2D<Meters, 'BCoordinates>
+            |> Vector2D.x }
+
+    let relativeTo (frame: Frame2D<Meters, 'ACoords, 'BCoords>) (canvas: Canvas<'ACoords>) =
+        mapGeometry (Geometry.relativeTo frame) canvas
+
     // ---- Accessors ----------------------------------------------------------
 
     /// The total height of the canvas including the margins
@@ -30,6 +43,9 @@ module Canvas =
 
     /// The total width of the canvas including the margins
     let width (canvas: Canvas<'Coordinates>) : Length = canvas.Size.Width
+
+    /// The total width of the canvas including the margins
+    let margin (canvas: Canvas<'Coordinates>) : Length = canvas.Margin
 
     /// The height of the area that is being drawn on. This is the canvas height WITHOUT the margins.
     let workingHeight (canvas: Canvas<'Coordinates>) : Length = canvas.Size.Height - 2. * canvas.Margin
@@ -41,13 +57,21 @@ module Canvas =
 
     /// Create a size with a particular orientation. This is a helper
     /// function that makes it easier to create default page sizes.
-    let private withOrientation (orientation: Orientation) (side1: Length) (side2: Length) : Size2D<Meters, Cartesian> =
+    let private withOrientation
+        (orientation: Orientation)
+        (margin: Length)
+        (side1: Length)
+        (side2: Length)
+        : Canvas<'Coordinates> =
         let min = Length.min side1 side2
         let max = Length.max side1 side2
 
-        match orientation with
-        | Orientation.Portrait -> Size2D.create min max
-        | Orientation.Landscape -> Size2D.create max min
+        let size =
+            match orientation with
+            | Orientation.Portrait -> Size2D.create min max
+            | Orientation.Landscape -> Size2D.create max min
 
-    let a4 (orientation: Orientation) : Size2D<Meters, Cartesian> =
-        withOrientation orientation (Length.millimeters 1189.) (Length.millimeters 841.)
+        create size margin
+
+    let a4 (orientation: Orientation) (margin: Length) : Canvas<'Coordinates> =
+        withOrientation orientation margin (Length.millimeters 1189.) (Length.millimeters 841.)

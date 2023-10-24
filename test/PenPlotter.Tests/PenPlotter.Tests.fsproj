@@ -6,8 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Svg.fs" />
-        <Compile Include="Avalonia.fs" />
+        <Compile Include="Geometry.fs" />
+        <Compile Include="Plotter.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

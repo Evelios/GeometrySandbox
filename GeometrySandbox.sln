@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DC207CE9-AA92-4077-97D7-2A77705DA492}"
 	ProjectSection(SolutionItems) = preProject
 		docs\Index.fsx = docs\Index.fsx
+		docs\Plotter.fsx = docs\Plotter.fsx
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PenPlotter.Tests", "test\PenPlotter.Tests\PenPlotter.Tests.fsproj", "{216E241A-CBCE-45FA-BDBD-8DD54D243261}"
