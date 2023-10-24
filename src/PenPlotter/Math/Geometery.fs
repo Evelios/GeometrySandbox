@@ -3,6 +3,13 @@ module PenPlotter.Geometry
 open Math.Geometry
 open Math.Units
 
+module Size2D =
+    let relativeTo
+        (frame: Frame2D<Meters, 'InitialCoordinates, 'FinalCoordinates>)
+        (size: Size2D<'InitialCoordinates, 'FinalCoordiantes>)
+        : Size2D<Meters, 'FinalCoordinates> =
+        size
+
 /// Convert a generic geometry object into a new reference frame. This allows
 /// for translating geometry into new coordinate systems.
 let relativeTo
@@ -12,6 +19,8 @@ let relativeTo
     match geometry with
     | :? Vector2D<Meters, 'InitialCoordinates> as vector ->
         Vector2D.relativeTo conversionFrame vector :> IGeometry<'FinalCoordinates>
+    | :? Size2D<Meters, 'InitialCoordinates> as size ->
+        Size2D.relativeTo conversionFrame size :> IGeometry<'FinalCoordinates>
     | :? Point2D<Meters, 'InitialCoordinates> as point ->
         Point2D.relativeTo conversionFrame point :> IGeometry<'FinalCoordinates>
     | :? LineSegment2D<Meters, 'InitialCoordinates> as line ->
@@ -25,12 +34,7 @@ let relativeTo
     | :? Polyline2D<Meters, 'InitialCoordinates> as polyline ->
         Polyline2D.relativeTo conversionFrame polyline :> IGeometry<'FinalCoordinates>
 
-    | _ ->
-        failwith (
-            "Unable to create SVG from geometry.\n"
-            + " This can be caused by not using the SvgCoordinates coordinate system:\n"
-            + $"{geometry.GetType()}: {geometry}"
-        )
+    | _ -> failwith "Geometry type is not supported\n{geometry.GetType()}: {geometry}"
 
 let translate
     (translation: Vector2D<Meters, 'Coordinates>)
